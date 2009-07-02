@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<RelativeLayout android:orientation="vertical"
+		android:id="@+id/main_title_layer" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:layout_alignParentTop="true"
+		android:layout_centerInParent="true">
+		<Button android:text="@string/btn_task" android:id="@+id/btn_task"
+			android:layout_width="wrap_content" android:paddingBottom="0dip"
+			android:paddingTop="0dip" android:layout_height="40dip" />
+		<Button android:text="@string/btn_service" android:id="@+id/btn_service"
+			android:layout_toRightOf="@id/btn_task" android:layout_width="wrap_content"
+			android:paddingBottom="0dip" android:paddingTop="0dip"
+			android:layout_height="40dip" />
+		<Button android:text="@string/btn_system" android:id="@+id/btn_system"
+			android:layout_toRightOf="@id/btn_service" android:layout_width="wrap_content"
+			android:paddingBottom="0dip" android:paddingTop="0dip"
+			android:layout_height="40dip" />
+	</RelativeLayout>
+	<RelativeLayout android:orientation="vertical"
+		android:id="@+id/main_control_layer" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_alignParentBottom="true"
+		android:visibility="gone">
+		<Button android:text="Button01" android:id="@+id/Button01"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+	</RelativeLayout>
+	<ListView android:id="@+id/listbody" android:layout_width="fill_parent"
+		android:layout_above="@id/main_control_layer" android:layout_below="@id/main_title_layer"
+		android:layout_height="fill_parent" android:scrollbars="none|vertical"
+		android:layout_alignWithParentIfMissing="true" />
+</RelativeLayout>
+	
