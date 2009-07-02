@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<!-- Used in contact edit menus -->
+	<string-array name="menu_task_operation">
+        <item>Cancel</item>
+		<item>Switch To</item>
+		<item>Kill it!</item>
+		<item>See Detail</item>
+		<item>Uninstall</item>
+	</string-array>
+
+</resources>
