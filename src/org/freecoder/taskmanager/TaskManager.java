@@ -29,7 +29,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 public class TaskManager extends Activity {
-    public static final String TAG = "EasyTaskManager";
+    public static final boolean DEBUG = true;
+    public static final String TAG = "FreeTaskManager";
     private ProcessInfo pinfo = null;
     ActivityManager am = null;
     private PackagesInfo packageinfo = null;
