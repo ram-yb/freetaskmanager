@@ -6,19 +6,18 @@
 	<ImageView android:id="@+id/list_icon" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:layout_alignParentTop="true"
 		android:layout_alignParentBottom="true" android:layout_marginRight="5dip"
-		android:adjustViewBounds="true" android:maxWidth="24dip" android:src="@drawable/icon"
-		android:maxHeight="24dip" />
+		android:adjustViewBounds="true" android:maxWidth="48dip" android:src="@drawable/icon"
+		android:maxHeight="48dip" />
 
 	<TextView android:id="@+id/list_name" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:layout_toRightOf="@id/list_icon"
-		android:layout_alignParentRight="true" android:layout_alignParentTop="true"
-		android:layout_alignWithParentIfMissing="true"
+		android:layout_alignParentRight="true" android:layout_alignWithParentIfMissing="true"
 		android:textColor="#FFFFFF" android:textStyle="normal"
 		android:textAppearance="?android:attr/textAppearanceMedium"
-		android:gravity="center_vertical" android:text="test" />
+		android:gravity="center_vertical" android:text="test" android:layout_centerInParent="true"/>
 	<TextView android:id="@+id/list_size"
 		android:layout_alignParentRight="true" android:layout_width="wrap_content"
 		android:textAppearance="?android:attr/textAppearanceMedium"
-		android:layout_height="wrap_content" android:text="12334" />
+		android:layout_height="wrap_content" android:text="12334" android:layout_centerInParent="true" android:layout_marginRight="5dip"/>
 
 </RelativeLayout>

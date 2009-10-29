@@ -9,6 +9,8 @@ import java.util.List;
 import org.freecoder.taskmanager.TaskListAdapters.TasksListAdapter;
 import org.freecoder.taskmanager.TaskListAdapters.ProcessListAdapter;
 
+import com.google.masf.OneTimeCache;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.MemoryInfo;
@@ -25,8 +27,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class TaskManager extends Activity {
     public static final boolean DEBUG = true;
@@ -45,6 +49,7 @@ public class TaskManager extends Activity {
     private int currentStat = STAT_TASK;
     private ProcessListAdapter adapter;
     private BroadcastReceiver loadFinish = new LoadFinishReceiver();
+    private ArrayList<DetailProcess> listdp;
 
     /** Called when the activity is first created. */
     @Override
@@ -66,13 +71,10 @@ public class TaskManager extends Activity {
 
         });
         packageinfo = new PackagesInfo(this);
-        
-        IntentFilter filter = new IntentFilter(ACTION_LOAD_FINISH);
-        this.registerReceiver(loadFinish, filter);
-        
+                
     }
 
-    private ListView getListView() {
+    ListView getListView() {
         return (ListView) this.findViewById(R.id.listbody);
     }
     
@@ -115,6 +117,8 @@ public class TaskManager extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        IntentFilter filter = new IntentFilter(ACTION_LOAD_FINISH);
+        this.registerReceiver(loadFinish, filter);
         packageinfo = new PackagesInfo(this);
         // Make sure the progress bar is visible
 
@@ -124,7 +128,7 @@ public class TaskManager extends Activity {
     @SuppressWarnings("unchecked")
     public void getRunningProcess() {
         List<RunningAppProcessInfo> list2 = am.getRunningAppProcesses();
-        ArrayList<DetailProcess> list = new ArrayList<DetailProcess>();
+        listdp = new ArrayList<DetailProcess>();
         for (RunningAppProcessInfo ti : list2) {
             // System.out.println(ti.processName + "/" + ti.pid + "/" + ti.lru + "/" + ti.importance
             // + "/"
@@ -138,12 +142,12 @@ public class TaskManager extends Activity {
             dp.fetchPsRow(pinfo);
             // dp.fetchTaskInfo(this);
             if (dp.isGoodProcess()) {
-                list.add(dp);
+                listdp.add(dp);
                 // System.out.println(Arrays.toString(dp.getPkginfo().activities));
             }
         }
-        Collections.sort(list);
-        adapter = new ProcessListAdapter(this, list);
+        Collections.sort(listdp);
+        adapter = new ProcessListAdapter(this, listdp);
     }
 
     // public RunningTaskInfo getTaskInfo(String name) {
@@ -192,7 +196,26 @@ public class TaskManager extends Activity {
         public void onReceive(final Context ctx, Intent intent) {
             TaskManager.this.setProgressBarIndeterminateVisibility(false);
             TaskManager.this.getListView().setAdapter(adapter);
+            TaskManager.this.getListView().setOnItemClickListener(new OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                    if (currentStat == STAT_TASK) {
+                        DetailProcess dp = listdp.get(arg2);
+                        MiscUtil.getTaskMenuDialog(TaskManager.this, dp).show();
+                    }
+                    //System.out.println(arg2);
+                }
+                
+            });
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        this.unregisterReceiver(loadFinish);
+    }
+
+    
 }

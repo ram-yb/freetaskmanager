@@ -33,7 +33,7 @@ public class MiscUtil {
 
     public static Dialog getTaskMenuDialog(final TaskManager ctx, final DetailProcess dp) {
 
-        return new AlertDialog.Builder(ctx).setTitle(R.string.operation).setItems(
+        return new AlertDialog.Builder(ctx).setTitle(dp.getTitle()).setItems(
                 R.array.menu_task_operation, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
