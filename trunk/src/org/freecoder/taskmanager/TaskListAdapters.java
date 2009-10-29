@@ -7,10 +7,14 @@ import org.freecoder.taskmanager.ProcessInfo.PsRow;
 
 import android.app.ActivityManager.RunningTaskInfo;
 import android.content.pm.PackageManager;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
+import android.view.View.OnCreateContextMenuListener;
+import android.view.View.OnLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -138,7 +142,6 @@ public class TaskListAdapters {
                 }
                 
             });
-            
             return convertView;
         }
 
